@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { AngleContextProvider } from './contexts/gameContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <AngleContextProvider>
+      <App />
+    </AngleContextProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

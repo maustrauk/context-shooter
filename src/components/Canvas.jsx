@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { AngleContext } from '../contexts/gameContext';
 
 const Canvas = (props) => {
+    const angleContext = useContext(AngleContext);
+
     const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
     return (
       <svg
@@ -9,6 +12,7 @@ const Canvas = (props) => {
         viewBox={viewBox}
         onMouseMove={props.trackMouse}
       >
+          {console.log(angleContext)}
       </svg>
     );
   };
