@@ -2,8 +2,8 @@ import React, {useState, createContext } from 'react';
 import { calculateAngle } from '../utils/formulas';
 
 export const cannonPipePos = {
-  x: 640,
-  y: 710
+  x: window.innerWidth / 2,
+  y: window.innerHeight,
 }
 
 
