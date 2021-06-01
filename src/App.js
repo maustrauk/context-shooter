@@ -1,16 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import Canvas from './components/Canvas';
 
-class App extends Component {
-
-
-  render() {
-    return (
-      <Canvas />
-    );
-  }
+const App = (props) => {
+  return (
+    <Canvas />
+  );
 }
+
 
 App.propTypes = {
   message: PropTypes.string,
