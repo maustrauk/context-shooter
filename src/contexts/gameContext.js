@@ -1,20 +1,33 @@
 import React, {useState, createContext } from 'react';
+import { calculateAngle } from '../utils/formulas';
+
+export const cannonPipePos = {
+  x: 640,
+  y: 710
+}
 
 
 export const AngleContext = createContext({
     angle: '',
-    setAngle: () => {/*Some function*/},
+    mousePosition: {},
+    setMousePosition: () => {/*Some function*/},
   });
 
   export const AngleContextProvider = props => {
-    const setAngle = angle => {
-      setState({ ...state, angle: angle });
-    };
+
+    const setMousePosition = mousePosition => {
+        const tempAngel = calculateAngle(mousePosition.x, mousePosition.y, cannonPipePos.x, cannonPipePos.y)
+        setState({ ...state, mousePosition: mousePosition, angle: tempAngel});
+      };
   
   
     const initState = {
-        setAngle: setAngle,
-      angle: '45',
+        setMousePosition: setMousePosition,
+        angle: 0,
+        mousePosition: {
+            x: 0,
+            y: 0,
+        }
     };
   
     const [state, setState] = useState(initState);
