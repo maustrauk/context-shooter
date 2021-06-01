@@ -3,7 +3,7 @@ import React, {useState, createContext } from 'react';
 
 export const AngleContext = createContext({
     angle: '',
-    setAngle: () => {},
+    setAngle: () => {/*Some function*/},
   });
 
   export const AngleContextProvider = props => {
