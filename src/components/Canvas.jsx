@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import { AngleContext } from '../contexts/gameContext';
 import Sky from './Sky';
 import Ground from './Ground';
+import CannonBase from './CannonBase';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
+
 
     const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
     return (
@@ -14,15 +15,13 @@ const Canvas = (props) => {
         viewBox={viewBox}
         onMouseMove={props.trackMouse}
       >
-          {console.log(angleContext)}
+          {console.log(angleContext.angle)}
           <Sky />
           <Ground />
+          <CannonBase />
       </svg>
     );
   };
 
-  Canvas.propTypes = {
-      message: PropTypes.string,
-  };
 
   export default Canvas;
