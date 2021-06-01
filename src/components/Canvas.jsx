@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { AngleContext } from '../contexts/gameContext';
+import Sky from './Sky';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
@@ -13,6 +14,7 @@ const Canvas = (props) => {
         onMouseMove={props.trackMouse}
       >
           {console.log(angleContext)}
+          <Sky />
       </svg>
     );
   };
