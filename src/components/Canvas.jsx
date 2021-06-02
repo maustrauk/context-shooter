@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { AngleContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
+import { calculateAngle } from '../utils/formulas';
 
 import Sky from './Sky';
 import Ground from './Ground';
@@ -20,15 +21,23 @@ const Canvas = (props) => {
        const mousePos = {
            x: e.clientX,
            y: e.clientY,
-       }
+       };
+
+       const cannonBaseCenter = {
+         x: window.innerWidth / 2,
+         y: window.innerHeight - 60,
+       };
+
+       
 
        angleContext.setMousePosition(mousePos);
+       angleContext.setCannonBaseCenter(cannonBaseCenter);
+       angleContext.setAngle(calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y));
     }
 
-    
-
-
     const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];
+
+
     return (
       <svg
         id="shooter-game-canvas"
