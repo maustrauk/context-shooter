@@ -1,10 +1,7 @@
 import React, {useState, createContext } from 'react';
 import { calculateAngle } from '../utils/formulas';
+import { cannonPipePos } from '../utils/constants';
 
-export const cannonPipePos = {
-  x: window.innerWidth / 2,
-  y: window.innerHeight,
-}
 
 
 export const AngleContext = createContext({
