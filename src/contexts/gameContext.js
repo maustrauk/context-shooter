@@ -1,5 +1,9 @@
 import { bool, number } from 'prop-types';
-import React, {useState, createContext } from 'react';
+import React, { useState, createContext } from 'react';
+
+import { initialFlyingObjects, initialCreatedAt } from '../utils/constants';
+
+//GameplayContext
 
 export const GameplayContext = createContext({
   startGame: bool,
@@ -39,6 +43,41 @@ export const GameplayContextProvider = props => {
     <GameplayContext.Provider value={state}>{props.children}</GameplayContext.Provider>
   );
 };
+
+//FlyingObjectContext
+
+export const FlyingObjectContext = createContext({
+  flyingObjects: [],
+  lastObjectCreatedAt: number,
+  setFlyingObjects: () => {/*Some function*/},
+  setLastObjectCreatedAt: () => {/*Some function*/},
+});
+
+export const FlyingObjectContextProvider = props => {
+
+  const setFlyingObjects = (flyingObjects) => {
+    setState({ ...state, flyingObjects: flyingObjects});
+  };
+
+  const setLastObjectCreatedAt = (lastObjectCreatedAt) => {
+    setState({ ...state, lastObjectCreatedAt: lastObjectCreatedAt});
+  };
+
+  const initState = {
+    setFlyingObjects: setFlyingObjects,
+    setLastObjectCreatedAt: setLastObjectCreatedAt,
+    flyingObjects: initialFlyingObjects,
+    lastObjectCreatedAt: initialCreatedAt,
+  };
+
+  const [state, setState] = useState(initState);
+
+  return (
+    <FlyingObjectContext.Provider value={state}>{props.children}</FlyingObjectContext.Provider>
+  );
+};
+
+//AngleContext
 
 export const AngleContext = createContext({
     angle: number,

@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AngleContextProvider, GameplayContextProvider } from './contexts/gameContext';
+import { AngleContextProvider, GameplayContextProvider, FlyingObjectContextProvider } from './contexts/gameContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <AngleContextProvider>
       <GameplayContextProvider>
-        <App />
+        <FlyingObjectContextProvider>
+          <App />
+        </FlyingObjectContextProvider>
       </GameplayContextProvider>
     </AngleContextProvider>
   </React.StrictMode>,

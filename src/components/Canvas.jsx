@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { AngleContext, GameplayContext } from '../contexts/gameContext';
+import { AngleContext, GameplayContext, FlyingObjectContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
+
+import createFlyingObjects from '../utils/createFlyingObjects';
 
 import Sky from './Sky';
 import Ground from './Ground';
@@ -17,6 +19,8 @@ import Title from './Title';
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
     const gameplayContext = useContext(GameplayContext);
+    const flyingObjectContext = useContext(FlyingObjectContext);
+
 
     const onMove = (e) => {
        const mousePos = {
@@ -29,11 +33,16 @@ const Canvas = (props) => {
          y: window.innerHeight - 60,
        };
 
-       
-
        angleContext.setMousePosition(mousePos);
        angleContext.setCannonBaseCenter(cannonBaseCenter);
        angleContext.setAngle(calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y));
+
+       createFlyingObjects(gameplayContext.startGame, flyingObjectContext);
+    }
+
+    const startButtonHandler = (e) => {
+      e.preventDefault();
+      gameplayContext.setStartGame(true);
     }
 
     const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];
@@ -56,16 +65,16 @@ const Canvas = (props) => {
           <CannonPipe rotation={angleContext.angle} />
           <CannonBase />
           <CurrentScore score={gameplayContext.kills} />
-          { gameplayContext.startGame && 
-          <g>
-            <FlyingObject position={{x: -150, y: -300}}/>
-            <FlyingObject position={{x: 150, y: -300}}/>
-          </g>
+          { gameplayContext.startGame ? <g>
+            {flyingObjectContext.flyingObjects.map((flyingObject, id) => (
+              <FlyingObject key={id} position={flyingObject.position} />
+            ))}
+          </g> : null
           }
           <Heart position={{x: -300, y: 35}} />
           { ! gameplayContext.startGame && 
             <g>
-              <StartGame onClick={() => gameplayContext.setStartGame(true)} />
+              <StartGame onClick={startButtonHandler} />
               <Title/>
             </g>
           }
