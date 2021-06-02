@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { AngleContext } from '../contexts/gameContext';
+import { gameHeight } from '../utils/constants';
 
 import Sky from './Sky';
 import Ground from './Ground';
@@ -24,8 +25,10 @@ const Canvas = (props) => {
        angleContext.setMousePosition(mousePos);
     }
 
+    
 
-    const viewBox = [window.innerWidth / -2, 100 - window.innerHeight, window.innerWidth, window.innerHeight];
+
+    const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];
     return (
       <svg
         id="shooter-game-canvas"

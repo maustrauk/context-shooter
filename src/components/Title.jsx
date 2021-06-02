@@ -11,7 +11,7 @@ const Title = () => {
   const contextLineCurve = {
     initialAxis: {
       x: -190,
-      y: -550,
+      y: -900,
     },
     initialControlPoint: {
       x: 95,
@@ -31,7 +31,7 @@ const Title = () => {
     ...contextLineCurve,
     initialAxis: {
       x: -250,
-      y: -370,
+      y: -690,
     },
     initialControlPoint: {
       x: 125,
