@@ -1,9 +1,47 @@
+import { bool, number } from 'prop-types';
 import React, {useState, createContext } from 'react';
 
+export const GameplayContext = createContext({
+  startGame: bool,
+  kills: number,
+  lives: number,
+  setStartGame: () => {/*Some function*/},
+  setKills: () => {/*Some function*/},
+  setLives: () => {/*Some function*/},
+});
 
+export const GameplayContextProvider = props => {
+
+  const setStartGame = (startGame) => {
+      setState({ ...state, startGame: startGame});
+    };
+
+  const setKills = (kills) => {
+    setState({ ...state, kills: kills});
+  };
+
+  const setLives = (lives) => {
+    setState({ ...state, lives: lives});
+  };
+
+  const initState = {
+    setStartGame: setStartGame,
+    setKills: setKills,
+    setLives: setLives,
+    kills: 0,
+    lives: 0,
+    startGame: false,
+  };
+
+  const [state, setState] = useState(initState);
+
+  return (
+    <GameplayContext.Provider value={state}>{props.children}</GameplayContext.Provider>
+  );
+};
 
 export const AngleContext = createContext({
-    angle: '',
+    angle: number,
     mousePosition: {},
     cannonBaseCenter: {},
     setMousePosition: () => {/*Some function*/},
