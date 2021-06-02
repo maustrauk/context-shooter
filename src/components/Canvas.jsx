@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AngleContext } from '../contexts/gameContext';
+import { AngleContext, GameplayContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
 
@@ -16,6 +16,7 @@ import Title from './Title';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
+    const gameplayContext = useContext(GameplayContext);
 
     const onMove = (e) => {
        const mousePos = {
@@ -54,12 +55,20 @@ const Canvas = (props) => {
           <CannonBall position={{x: 0, y: -100}}/>
           <CannonPipe rotation={angleContext.angle} />
           <CannonBase />
-          <CurrentScore score={15} />
-          <FlyingObject position={{x: -150, y: -300}}/>
-          <FlyingObject position={{x: 150, y: -300}}/>
+          <CurrentScore score={gameplayContext.kills} />
+          { gameplayContext.startGame && 
+          <g>
+            <FlyingObject position={{x: -150, y: -300}}/>
+            <FlyingObject position={{x: 150, y: -300}}/>
+          </g>
+          }
           <Heart position={{x: -300, y: 35}} />
-          <StartGame onClick={() => console.log('Start')} />
-          <Title/>
+          { ! gameplayContext.startGame && 
+            <g>
+              <StartGame onClick={() => gameplayContext.setStartGame(true)} />
+              <Title/>
+            </g>
+          }
       </svg>
     );
   };
