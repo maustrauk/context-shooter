@@ -3,7 +3,7 @@ import Canvas from './components/Canvas';
 
 
 class App extends Component  {
-
+  
   componentDidMount() {
     window.onresize = () => {
       const cnv = document.getElementById('shooter-game-canvas');
