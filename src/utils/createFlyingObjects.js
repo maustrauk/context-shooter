@@ -1,15 +1,14 @@
 import { createInterval, flyingObjectsStarterYAxis, maxFlyingObjects, flyingObjectsStarterPositions } from './constants';
+import deleteFlyingObject from './deleteFlyingObject';
 
-const createFlyingObjects = (gameStarted, flyingObjectsContext) => {
-
-    if (! gameStarted ) return ;
+const createFlyingObjects = (flyingObjectsContext) => {
 
     const now = (new Date()).getTime();
 
     const createNewObject = ((now - flyingObjectsContext.lastObjectCreatedAt) > createInterval && flyingObjectsContext.flyingObjects.length < maxFlyingObjects);
 
 
-    if (! createNewObject) return ;
+    if (! createNewObject) return deleteFlyingObject(flyingObjectsContext);
 
     const predefinedPosition = Math.floor(Math.random() * maxFlyingObjects);
 

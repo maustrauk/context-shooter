@@ -37,7 +37,9 @@ const Canvas = (props) => {
        
        angleContext.setAngelContextState(angle, mousePos, cannonBaseCenter);
 
-      createFlyingObjects(gameplayContext.startGame, flyingObjectContext);
+       if (gameplayContext.startGame) {
+        createFlyingObjects(flyingObjectContext);
+       }
     }
 
     const startButtonHandler = (e) => {
