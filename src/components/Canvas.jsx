@@ -33,16 +33,16 @@ const Canvas = (props) => {
          y: window.innerHeight - 60,
        };
 
-       angleContext.setMousePosition(mousePos);
-       angleContext.setCannonBaseCenter(cannonBaseCenter);
-       angleContext.setAngle(calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y));
+       const angle = calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y);
+       
+       angleContext.setAngelContextState(angle, mousePos, cannonBaseCenter);
 
-       createFlyingObjects(gameplayContext.startGame, flyingObjectContext);
+      createFlyingObjects(gameplayContext.startGame, flyingObjectContext);
     }
 
     const startButtonHandler = (e) => {
       e.preventDefault();
-      gameplayContext.setStartGame(true);
+      gameplayContext.setGameplayContextState(gameplayContext.kills, gameplayContext.lives, true);
     }
 
     const viewBox = [window.innerWidth / -2, 100 - gameHeight, window.innerWidth, gameHeight];

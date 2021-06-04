@@ -2,16 +2,14 @@ import { createInterval, flyingObjectsStarterYAxis, maxFlyingObjects, flyingObje
 
 const createFlyingObjects = (gameStarted, flyingObjectsContext) => {
 
-    const { flyingObjects, lastObjectCreatedAt, setLastObjectCreatedAt} = flyingObjectsContext;
-
-    if (! gameStarted ) return flyingObjects;
+    if (! gameStarted ) return ;
 
     const now = (new Date()).getTime();
 
-    const createNewObject = ((now - lastObjectCreatedAt) > createInterval && flyingObjects.length < maxFlyingObjects);
+    const createNewObject = ((now - flyingObjectsContext.lastObjectCreatedAt) > createInterval && flyingObjectsContext.flyingObjects.length < maxFlyingObjects);
 
 
-    if (! createNewObject) return flyingObjects;
+    if (! createNewObject) return ;
 
     const predefinedPosition = Math.floor(Math.random() * maxFlyingObjects);
 
@@ -25,11 +23,10 @@ const createFlyingObjects = (gameStarted, flyingObjectsContext) => {
         createdAt: now
     };
 
-    setLastObjectCreatedAt(now);
 
-    flyingObjects.push(newFlyingObject)
+    const updatedFlyingObjects = [...flyingObjectsContext.flyingObjects, newFlyingObject];
 
-    return flyingObjects;
+    return flyingObjectsContext.setFlyingObjectContext(updatedFlyingObjects, now);
 
 }
 
