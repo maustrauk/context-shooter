@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { AngleContext, GameplayContext, FlyingObjectContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
+import { signIn } from 'auth0-web';
 
 import createFlyingObjects from '../utils/createFlyingObjects';
 
@@ -15,6 +16,7 @@ import FlyingObject from './FlyingObject';
 import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
+import Login from './Login';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
@@ -78,6 +80,7 @@ const Canvas = (props) => {
             <g>
               <StartGame onClick={startButtonHandler} />
               <Title/>
+              <Login authenticate={signIn} />
             </g>
           }
       </svg>
