@@ -20,6 +20,8 @@ import Leaderboard from './Leaderboard';
 
 import { leaderboard } from '../utils/mockData';
 
+import staticBalls from '../utils/staticBalls';
+
 const Canvas = (props) => {
 
 
@@ -47,6 +49,7 @@ const Canvas = (props) => {
 
        if (gameplayContext.startGame) {
         createFlyingObjects(flyingObjectContext);
+        staticBalls(ballContext, angleContext.angle);
        }
     }
 
