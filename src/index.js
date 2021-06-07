@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { AngleContextProvider, GameplayContextProvider, FlyingObjectContextProvider } from './contexts/gameContext';
+import { AngleContextProvider, GameplayContextProvider, FlyingObjectContextProvider, BallContextProvider } from './contexts/gameContext';
 
 ReactDOM.render(
   <React.StrictMode>
     <AngleContextProvider>
       <GameplayContextProvider>
         <FlyingObjectContextProvider>
-          <App />
+          <BallContextProvider>
+            <App />
+          </BallContextProvider>
         </FlyingObjectContextProvider>
       </GameplayContextProvider>
     </AngleContextProvider>

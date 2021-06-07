@@ -6,14 +6,22 @@ import { initialFlyingObjects, initialCreatedAt } from '../utils/constants';
 
 const AngleInitState = {
   angle: 0,
-  mousePosition: {
-    x: 0,
-    y: 0,
-  },
   cannonBaseCenter: {
     x: 1200,
     y: 800,
   },
+};
+
+const BallInitState = {
+  balls: [
+    {
+      position: {
+        x: 0,
+        y: -100,
+      },
+      id: 0,
+    },
+  ]
 };
 
 const GameplayInitState = {
@@ -66,19 +74,34 @@ export const FlyingObjectContextProvider = props => {
 
 //AngleContext
 
-
-
 export const AngleContext = createContext();
 
 export const AngleContextProvider = props => {
 
   const [state, setState] = useState(AngleInitState);
 
-    const setAngelContextState = (angle, mousePosition, cannonBaseCenter) => {
-        setState({ ...state, angle: angle, mousePosition: mousePosition, cannonBaseCenter: cannonBaseCenter});
+    const setAngelContextState = (angle, cannonBaseCenter) => {
+        setState({ ...state, angle: angle, cannonBaseCenter: cannonBaseCenter});
       };
 
     return (
       <AngleContext.Provider value={{...state, setAngelContextState}}>{props.children}</AngleContext.Provider>
+    );
+  };
+
+//BallContext
+
+export const BallContext = createContext();
+
+export const BallContextProvider = props => {
+
+  const [state, setState] = useState(BallInitState);
+
+    const setBallContextState = (balls) => {
+        setState({...state, balls: balls});
+      };
+
+    return (
+      <BallContext.Provider value={{...state, setBallContextState}}>{props.children}</BallContext.Provider>
     );
   };

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AngleContext, GameplayContext, FlyingObjectContext } from '../contexts/gameContext';
+import { AngleContext, GameplayContext, FlyingObjectContext, BallContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
 import { signIn } from 'auth0-web';
@@ -26,9 +26,11 @@ const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
     const gameplayContext = useContext(GameplayContext);
     const flyingObjectContext = useContext(FlyingObjectContext);
+    const ballContext = useContext(BallContext);
 
 
-    const onMove = (e) => {
+
+    const onMoveCanvas = (e) => {
        const mousePos = {
            x: e.clientX,
            y: e.clientY,
@@ -41,11 +43,15 @@ const Canvas = (props) => {
 
        const angle = calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y);
        
-       angleContext.setAngelContextState(angle, mousePos, cannonBaseCenter);
+       angleContext.setAngelContextState(angle, cannonBaseCenter);
 
        if (gameplayContext.startGame) {
         createFlyingObjects(flyingObjectContext);
        }
+    }
+
+    const onClickCanvas = (e) => {
+      e.preventDefault();
     }
 
     const startButtonHandler = (e) => {
@@ -60,7 +66,8 @@ const Canvas = (props) => {
       <svg
         id="shooter-game-canvas"
         viewBox={viewBox}
-        onMouseMove={onMove}
+        onMouseMove={onMoveCanvas}
+        onClick={onClickCanvas}
       >
           <defs>
             <filter id="shadow">
@@ -69,7 +76,11 @@ const Canvas = (props) => {
           </defs>
           <Sky />
           <Ground />
-          <CannonBall position={{x: 0, y: -100}}/>
+          {
+            ballContext.balls.map(cannonBall => (
+              <CannonBall key ={cannonBall.id} position={cannonBall.position}/>
+            ))
+          }
           <CannonPipe rotation={angleContext.angle} />
           <CannonBase />
           <CurrentScore score={gameplayContext.kills} />
