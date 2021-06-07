@@ -36,3 +36,14 @@ export const calculateNextPosition = (x, y, angle, divisor = 300) => {
       y: y - stepsY,
     }
   };
+
+  export const calculateStartPosition = (angel, hight) => {
+    const ajustAngle = angel - 270;
+    const x = - hight * Math.cos(degreesToRadian(ajustAngle));
+    const y = - hight * Math.sin(degreesToRadian(ajustAngle));
+
+    return {
+      x: x,
+      y: y,
+    }
+  }
