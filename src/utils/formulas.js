@@ -24,3 +24,15 @@ export const calculateAngle = (x1, y1, x2, y2) => {
       return result + 180;
     }
   };
+
+export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
+
+export const calculateNextPosition = (x, y, angle, divisor = 300) => {
+    const realAngle = (angle * -1) + 90;
+    const stepsX = radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / divisor;
+    const stepsY = radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / divisor;
+    return {
+      x: x +stepsX,
+      y: y - stepsY,
+    }
+  };
