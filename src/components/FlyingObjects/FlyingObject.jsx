@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import FlyingObjectBase from './FlyingObjectBase';
 import FlyingObjectTop from './FlyingObjectTop';
 import styled, { keyframes } from 'styled-components';
-import { gameHeight } from '../utils/constants';
+import { gameHeight } from '../../utils/constants';
 
 
 const moveVertically = keyframes`
