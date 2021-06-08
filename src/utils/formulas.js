@@ -27,16 +27,6 @@ export const calculateAngle = (x1, y1, x2, y2) => {
 
 export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
 
-export const calculateNextPosition = (x, y, angle, step) => {
-  const ajustAngle = angle - 270;
-  const xStep = - step * Math.cos(degreesToRadian(ajustAngle));
-  const yStep = - step * Math.sin(degreesToRadian(ajustAngle));
-    return {
-      x: x + xStep,
-      y: y + yStep,
-    }
-  };
-
   export const calculateStartPosition = (angle, hight) => {
     const ajustAngle = angle - 270;
     const x = - hight * Math.cos(degreesToRadian(ajustAngle));
