@@ -6,13 +6,10 @@ import { signIn } from 'auth0-web';
 
 import createFlyingObjects from '../gameLogic/createFlyingObjects';
 
-import Sky from './Sky';
-import Ground from './Ground';
-import CannonBase from './CannonBase';
-import CannonPipe from './CannonPipe';
-import CannonBall from './CannonBall';
+import Background from './Background/Background';
+import Cannon from './Cannon/Cannon';
 import CurrentScore from './CurrentScore';
-import FlyingObject from './FlyingObject';
+import FlyingObject from './FlyingObjects/FlyingObject';
 import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
@@ -26,7 +23,7 @@ const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
     const gameplayContext = useContext(GameplayContext);
     const flyingObjectContext = useContext(FlyingObjectContext);
-    const ballContext = useContext(StartPositionBallContext);
+    const startPositionBallContext = useContext(StartPositionBallContext);
 
 
 
@@ -45,7 +42,7 @@ const Canvas = (props) => {
        
        angleContext.setAngelContextState(angle, cannonBaseCenter);
 
-       staticBall(ballContext, angleContext.angle);
+       staticBall(startPositionBallContext, angleContext.angle);
 
        if (gameplayContext.startGame) {
         createFlyingObjects(flyingObjectContext);
@@ -76,15 +73,8 @@ const Canvas = (props) => {
               <feDropShadow dx="1" dy="1" stdDeviation="2" />
             </filter>
           </defs>
-          <Sky />
-          <Ground />
-          {
-            ballContext.balls.map(cannonBall => (
-              <CannonBall key ={cannonBall.id} position={cannonBall.position}/>
-            ))
-          }
-          <CannonPipe rotation={angleContext.angle} />
-          <CannonBase />
+          <Background/>
+          <Cannon/>
           <CurrentScore score={gameplayContext.kills} />
           { gameplayContext.startGame ? <g>
             {flyingObjectContext.flyingObjects.map((flyingObject, id) => (
