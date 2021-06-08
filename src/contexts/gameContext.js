@@ -1,6 +1,6 @@
 import React, { useState, createContext } from 'react';
 
-import { GameplayInitState, FlyingObjectInitState, AngleInitState, StartPositionBallInitState} from './initalStates';
+import { GameplayInitState, FlyingObjectInitState, AngleInitState, StartPositionBallInitState, MovingBallsInitState} from './initalStates';
 
 
 //GameplayContext
@@ -71,3 +71,20 @@ export const StartPositionBallContextProvider = props => {
       <StartPositionBallContext.Provider value={{...state, setStartPositionBallContextState}}>{props.children}</StartPositionBallContext.Provider>
     );
   };
+
+  //MovingBallsContext
+
+  export const MovingBallsContext = createContext();
+
+  export const MovingBallsContextProvider = props => {
+
+    const [state, setState] = useState(MovingBallsInitState);
+  
+      const setMovingBallsContextState = (balls) => {
+          setState({...state, balls: balls});
+        };
+  
+      return (
+        <MovingBallsContext.Provider value={{...state, setMovingBallsContextState}}>{props.children}</MovingBallsContext.Provider>
+      );
+    };

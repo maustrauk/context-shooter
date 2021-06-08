@@ -9,16 +9,14 @@ export  const StartPositionBallInitState = {
           x: 0,
           y: -100,
         },
-        id: 0,
-        angle: 0,
         shootStatus: false,
-        shootingAnimation: {
-          x: 0,
-          y: 0,
-        },
       },
     ]
   };
+
+export const MovingBallsInitState = {
+  balls: [],
+};
   
 export const GameplayInitState = {
     kills: 0,
