@@ -27,18 +27,18 @@ export const calculateAngle = (x1, y1, x2, y2) => {
 
 export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
 
-export const calculateNextPosition = (x, y, angle, divisor = 300) => {
-    const realAngle = (angle * -1) + 90;
-    const stepsX = radiansToDegrees(Math.cos(degreesToRadian(realAngle))) / divisor;
-    const stepsY = radiansToDegrees(Math.sin(degreesToRadian(realAngle))) / divisor;
+export const calculateNextPosition = (x, y, angle, step) => {
+  const ajustAngle = angle - 270;
+  const xStep = - step * Math.cos(degreesToRadian(ajustAngle));
+  const yStep = - step * Math.sin(degreesToRadian(ajustAngle));
     return {
-      x: x +stepsX,
-      y: y - stepsY,
+      x: x + xStep,
+      y: y + yStep,
     }
   };
 
-  export const calculateStartPosition = (angel, hight) => {
-    const ajustAngle = angel - 270;
+  export const calculateStartPosition = (angle, hight) => {
+    const ajustAngle = angle - 270;
     const x = - hight * Math.cos(degreesToRadian(ajustAngle));
     const y = - hight * Math.sin(degreesToRadian(ajustAngle));
 
