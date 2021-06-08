@@ -1,4 +1,4 @@
-import { calculateNextPosition } from './formulas';
+import { calculateNextPosition } from '../utils/formulas';
 
 const moveBalls = (ballContext) => {
     const cannonBalls = [...ballContext.balls];
