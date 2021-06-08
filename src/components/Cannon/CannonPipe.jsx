@@ -1,6 +1,6 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { pathFromBezierCurve } from '../utils/formulas';
+import React, { useContext } from 'react';
+import { pathFromBezierCurve } from '../../utils/formulas';
+import { AngleContext } from '../../contexts/gameContext';
 
 const CannonPipe = (props) => {
   const cannonPipeStyle = {
@@ -8,7 +8,10 @@ const CannonPipe = (props) => {
     stroke: '#666',
     strokeWidth: '2px',
   };
-  const transform = `rotate(${props.rotation}, 0, 0)`;
+
+  const { angle } = useContext(AngleContext);
+
+  const transform = `rotate(${angle}, 0, 0)`;
 
   const muzzleWidth = 40;
   const halfMuzzle = muzzleWidth / 2;
@@ -49,10 +52,6 @@ const CannonPipe = (props) => {
       />
     </g>
   );
-};
-
-CannonPipe.propTypes = {
-  rotation: PropTypes.number.isRequired,
 };
 
 export default CannonPipe;

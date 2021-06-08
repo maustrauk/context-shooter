@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
-import { gameHeight } from '../utils/constants';
+import { gameHeight } from '../../utils/constants';
 
-import { StartPositionBallContext } from '../contexts/gameContext';
+import { StartPositionBallContext } from '../../contexts/gameContext';
 
 const moveVertically = keyframes`
   0% {
