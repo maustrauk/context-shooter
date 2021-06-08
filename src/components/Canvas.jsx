@@ -1,10 +1,10 @@
 import React, { useContext } from 'react';
-import { AngleContext, GameplayContext, FlyingObjectContext, BallContext } from '../contexts/gameContext';
+import { AngleContext, GameplayContext, FlyingObjectContext, StartPositionBallContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
 import { signIn } from 'auth0-web';
 
-import createFlyingObjects from '../utils/createFlyingObjects';
+import createFlyingObjects from '../gameLogic/createFlyingObjects';
 
 import Sky from './Sky';
 import Ground from './Ground';
@@ -20,15 +20,13 @@ import Leaderboard from './Leaderboard';
 
 import { leaderboard } from '../utils/mockData';
 
-import staticBalls from '../utils/staticBalls';
+import staticBall from '../gameLogic/staticBall';
 
 const Canvas = (props) => {
-
-
     const angleContext = useContext(AngleContext);
     const gameplayContext = useContext(GameplayContext);
     const flyingObjectContext = useContext(FlyingObjectContext);
-    const ballContext = useContext(BallContext);
+    const ballContext = useContext(StartPositionBallContext);
 
 
 
@@ -47,9 +45,10 @@ const Canvas = (props) => {
        
        angleContext.setAngelContextState(angle, cannonBaseCenter);
 
+       staticBall(ballContext, angleContext.angle);
+
        if (gameplayContext.startGame) {
         createFlyingObjects(flyingObjectContext);
-        staticBalls(ballContext, angleContext.angle);
        }
     }
 
