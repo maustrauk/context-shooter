@@ -9,7 +9,7 @@ import createFlyingObjects from '../gameLogic/createFlyingObjects';
 import Background from './Background/Background';
 import Cannon from './Cannon/Cannon';
 import CurrentScore from './CurrentScore';
-import FlyingObject from './FlyingObjects/FlyingObject';
+import FlyingObjects from './FlyingObjects/FlyingObjects';
 import Heart from './Heart';
 import StartGame from './StartGame';
 import Title from './Title';
@@ -18,6 +18,7 @@ import Leaderboard from './Leaderboard';
 import { leaderboard } from '../utils/mockData';
 
 import staticBall from '../gameLogic/staticBall';
+import FlyingBalls from './FlyingBalls';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
@@ -28,17 +29,12 @@ const Canvas = (props) => {
 
 
     const onMoveCanvas = (e) => {
-       const mousePos = {
-           x: e.clientX,
-           y: e.clientY,
-       };
-
        const cannonBaseCenter = {
          x: window.innerWidth / 2,
          y: window.innerHeight - 60,
        };
 
-       const angle = calculateAngle(mousePos.x, mousePos.y, cannonBaseCenter.x,cannonBaseCenter.y);
+       const angle = calculateAngle(e.clientX, e.clientY, cannonBaseCenter.x,cannonBaseCenter.y);
        
        angleContext.setAngelContextState(angle, cannonBaseCenter);
 
@@ -76,12 +72,8 @@ const Canvas = (props) => {
           <Background/>
           <Cannon/>
           <CurrentScore score={gameplayContext.kills} />
-          { gameplayContext.startGame ? <g>
-            {flyingObjectContext.flyingObjects.map((flyingObject, id) => (
-              <FlyingObject key={id} position={flyingObject.position} />
-            ))}
-          </g> : null
-          }
+          <FlyingObjects/>
+          <FlyingBalls />
           <Heart position={{x: -300, y: 35}} />
           { ! gameplayContext.startGame && 
             <g>
