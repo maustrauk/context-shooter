@@ -27,7 +27,6 @@ class App extends Component  {
     };
     window.onresize();
 
-    
   }
 
   render() {

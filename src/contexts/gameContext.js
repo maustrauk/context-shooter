@@ -1,40 +1,6 @@
 import React, { useState, createContext } from 'react';
 
-import { initialFlyingObjects, initialCreatedAt } from '../utils/constants';
-
-//Initials states
-
-const AngleInitState = {
-  angle: 0,
-  cannonBaseCenter: {
-    x: 1200,
-    y: 800,
-  },
-};
-
-const BallInitState = {
-  balls: [
-    {
-      position: {
-        x: 0,
-        y: -100,
-      },
-      id: 0,
-    },
-  ]
-};
-
-const GameplayInitState = {
-  kills: 0,
-  lives: 0,
-  startGame: false,
-};
-
-const FlyingObjectInitState = {
-  flyingObjects: initialFlyingObjects,
-  lastObjectCreatedAt: initialCreatedAt,
-};
-
+import { GameplayInitState, FlyingObjectInitState, AngleInitState, StartPositionBallInitState} from './initalStates';
 
 
 //GameplayContext
@@ -80,8 +46,8 @@ export const AngleContextProvider = props => {
 
   const [state, setState] = useState(AngleInitState);
 
-    const setAngelContextState = (angle, cannonBaseCenter) => {
-        setState({ ...state, angle: angle, cannonBaseCenter: cannonBaseCenter});
+    const setAngelContextState = (angle) => {
+        setState({ ...state, angle: angle});
       };
 
     return (
@@ -89,19 +55,19 @@ export const AngleContextProvider = props => {
     );
   };
 
-//BallContext
+//StartPositionBallContext
 
-export const BallContext = createContext();
+export const StartPositionBallContext = createContext();
 
-export const BallContextProvider = props => {
+export const StartPositionBallContextProvider = props => {
 
-  const [state, setState] = useState(BallInitState);
+  const [state, setState] = useState(StartPositionBallInitState);
 
-    const setBallContextState = (balls) => {
+    const setStartPositionBallContextState = (balls) => {
         setState({...state, balls: balls});
       };
 
     return (
-      <BallContext.Provider value={{...state, setBallContextState}}>{props.children}</BallContext.Provider>
+      <StartPositionBallContext.Provider value={{...state, setStartPositionBallContextState}}>{props.children}</StartPositionBallContext.Provider>
     );
   };
