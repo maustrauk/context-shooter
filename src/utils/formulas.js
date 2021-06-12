@@ -27,7 +27,7 @@ export const calculateAngle = (x1, y1, x2, y2) => {
 
 export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
 
-  export const calculateStartPosition = (angle, hight) => {
+export const calculateStartPosition = (angle, hight) => {
     const ajustAngle = angle - 270;
     const x = - hight * Math.cos(degreesToRadian(ajustAngle));
     const y = - hight * Math.sin(degreesToRadian(ajustAngle));
@@ -36,4 +36,4 @@ export const degreesToRadian = degrees => ((degrees * Math.PI) / 180);
       x: x,
       y: y,
     }
-  }
+  };
