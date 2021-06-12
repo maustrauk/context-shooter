@@ -1,7 +1,7 @@
 
 
-const moveBalls = (ballContext) => {
-    return ballContext;
+const moveBalls = () => {
+  return;
 };
   
   export default moveBalls;
