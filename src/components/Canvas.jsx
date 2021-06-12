@@ -49,11 +49,7 @@ const Canvas = (props) => {
 
     const onClickCanvas = (e) => {
       e.preventDefault();
-      const mousePosition = {
-        x: e.clientX,
-        y: e.clientY,
-      }
-      moveBalls(movingBallsContext,startPositionBallContext, mousePosition);
+      moveBalls(movingBallsContext,startPositionBallContext, angleContext);
     }
 
     const startButtonHandler = (e) => {

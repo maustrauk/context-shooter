@@ -21,8 +21,8 @@ export const MovingBallsInitState = {
         y: 0,
       },
       endPosition: {
-        translateX: 0,
-        translateY: 0,
+        x: 0,
+        y: 0,
       },
       renderStatus: false,
     }
