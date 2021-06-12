@@ -3,15 +3,14 @@ export const AngleInitState = {
   };
   
 export  const StartPositionBallInitState = {
-    balls: [
+    ball: 
       {
         position: {
           x: 0,
           y: -100,
         },
         shootStatus: false,
-      },
-    ]
+      },   
   };
 
 export const MovingBallsInitState = {

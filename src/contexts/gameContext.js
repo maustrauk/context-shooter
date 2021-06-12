@@ -63,8 +63,8 @@ export const StartPositionBallContextProvider = props => {
 
   const [state, setState] = useState(StartPositionBallInitState);
 
-    const setStartPositionBallContextState = (balls) => {
-        setState({...state, balls: balls});
+    const setStartPositionBallContextState = (ball) => {
+        setState({...state, ball: ball});
       };
 
     return (
