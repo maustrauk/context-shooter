@@ -14,7 +14,19 @@ export  const StartPositionBallInitState = {
   };
 
 export const MovingBallsInitState = {
-  movingBalls: [],
+  movingBalls: [
+    {
+      startPosition: {
+        x: 0,
+        y: 0,
+      },
+      endPosition: {
+        translateX: 0,
+        translateY: 0,
+      },
+      renderStatus: false,
+    }
+  ],
 };
   
 export const GameplayInitState = {

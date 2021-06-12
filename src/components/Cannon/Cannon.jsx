@@ -10,8 +10,13 @@ const Cannon = (props) => {
 
     const { ball } = useContext(StartPositionBallContext);
 
+    const endPosition = {
+        x: 0,
+        y: 0,
+    }
+
     return <g>
-        {!ball.shootStatus ? <CannonBall startPosition={ball.position} shootStatus={false}/> : null}
+        {!ball.shootStatus ? <CannonBall startPosition={ball.position} endPosition={endPosition} shootStatus={false}/> : null}
         <CannonPipe/>
         <CannonBase/>
     </g>

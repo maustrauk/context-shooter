@@ -6,13 +6,14 @@ const moveBalls = (movingBallsContext, staticBallContext, mousePosition) => {
 
   const newBall = {
     startPosition: staticBall.position,
-    endPostition: mousePosition,
+    endPosition: mousePosition,
+    renderStatus: true,
   }
   const movingBalls = [...movingBallsContext.movingBalls, newBall];
 
-  console.log(movingBalls);
+  const filteredBalls = movingBalls.filter(ball => ball.renderStatus);
 
-  return movingBallsContext.setMovingBallsContextState(movingBalls);
+  return movingBallsContext.setMovingBallsContextState(filteredBalls);
 };
   
   export default moveBalls;

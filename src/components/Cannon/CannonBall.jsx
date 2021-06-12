@@ -1,23 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { keyframes, css } from 'styled-components';
-import { gameHeight } from '../../utils/constants';
+import styled from 'styled-components';
 
-const moveVertically = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(${-gameHeight}px);
-  }
-`;
+import { flyingBallsAnimation } from '../../utils/animations';
 
-const cssAnimation = (props) => {
-  return css`animation: ${moveVertically} 4s linear`;
-}
 
 const MoveElipse = styled.ellipse`
-${props => props.activeAnimation && cssAnimation()}`;
+${props => props.activeAnimation && flyingBallsAnimation(props.endPosition)}`;
 
 const CannonBall = (props) => {
 
@@ -27,10 +16,12 @@ const CannonBall = (props) => {
     strokeWidth: '2px',
   };
 
+
   return (
     <MoveElipse
       activeAnimation={props.shootStatus}
       style={ballStyle}
+      endPosition={props.endPosition}
       cx={props.startPosition.x}
       cy={props.startPosition.y}
       rx="16"
@@ -45,6 +36,10 @@ CannonBall.propTypes = {
     y: PropTypes.number.isRequired
   }).isRequired,
   shootStatus: PropTypes.bool.isRequired,
+  endPosition: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
+  }).isRequired,
 };
 
 export default CannonBall;

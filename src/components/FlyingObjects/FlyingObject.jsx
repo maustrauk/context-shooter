@@ -2,21 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlyingObjectBase from './FlyingObjectBase';
 import FlyingObjectTop from './FlyingObjectTop';
-import styled, { keyframes } from 'styled-components';
-import { gameHeight } from '../../utils/constants';
+import styled from 'styled-components';
 
+import { flyingObjectsAnimation } from '../../utils/animations';
 
-const moveVertically = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(${gameHeight}px);
-  }
-`;
 
 const Move = styled.g`
-  animation: ${moveVertically} 4s linear;
+  ${flyingObjectsAnimation()}
 `;
 
 const FlyingObject = props => (
