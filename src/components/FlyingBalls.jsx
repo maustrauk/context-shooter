@@ -11,7 +11,7 @@ const FlyingBalls = (props) => {
 
     return <g>
         {startGame ? 
-            movingBalls.map((movingBall, id) => (<CannonBall key={`MovingBallId${id}`} position={movingBall.position}/>)) :
+            movingBalls.map((movingBall, id) => (<CannonBall key={`MovingBallId${id}`} startPosition={movingBall.startPosition} shootStatus={true}/>)) :
             null}
     </g>
 };

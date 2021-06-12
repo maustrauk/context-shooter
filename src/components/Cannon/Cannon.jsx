@@ -11,7 +11,7 @@ const Cannon = (props) => {
     const { balls } = useContext(StartPositionBallContext);
 
     return <g>
-        {balls.map((ball, id) => (<CannonBall key={`StartBallId${id}`} position={ball.position}/>))}
+        {balls.map((ball, id) => (<CannonBall key={`StartBallId${id}`} startPosition={ball.position} shootStatus={false}/>))}
         <CannonPipe/>
         <CannonBase/>
     </g>
