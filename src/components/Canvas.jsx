@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { AngleContext, GameplayContext, FlyingObjectContext, StartPositionBallContext } from '../contexts/gameContext';
+import { AngleContext, GameplayContext, FlyingObjectContext, StartPositionBallContext, MovingBallsContext } from '../contexts/gameContext';
 import { gameHeight } from '../utils/constants';
 import { calculateAngle } from '../utils/formulas';
 import { signIn } from 'auth0-web';
@@ -18,6 +18,7 @@ import Leaderboard from './Leaderboard';
 import { leaderboard } from '../utils/mockData';
 
 import staticBall from '../gameLogic/staticBall';
+import moveBalls from '../gameLogic/moveBalls';
 import FlyingBalls from './FlyingBalls';
 
 const Canvas = (props) => {
@@ -25,6 +26,7 @@ const Canvas = (props) => {
     const gameplayContext = useContext(GameplayContext);
     const flyingObjectContext = useContext(FlyingObjectContext);
     const startPositionBallContext = useContext(StartPositionBallContext);
+    const movingBallsContext = useContext(MovingBallsContext);
 
 
 
@@ -47,6 +49,11 @@ const Canvas = (props) => {
 
     const onClickCanvas = (e) => {
       e.preventDefault();
+      const mousePosition = {
+        x: e.clientX,
+        y: e.clientY,
+      }
+      moveBalls(movingBallsContext,startPositionBallContext, mousePosition);
     }
 
     const startButtonHandler = (e) => {

@@ -80,8 +80,8 @@ export const StartPositionBallContextProvider = props => {
 
     const [state, setState] = useState(MovingBallsInitState);
   
-      const setMovingBallsContextState = (balls) => {
-          setState({...state, balls: balls});
+      const setMovingBallsContextState = (movingBalls) => {
+          setState({...state, movingBalls: movingBalls});
         };
   
       return (
