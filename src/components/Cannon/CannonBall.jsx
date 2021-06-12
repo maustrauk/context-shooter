@@ -1,9 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes, css } from 'styled-components';
 import { gameHeight } from '../../utils/constants';
-
-import { StartPositionBallContext } from '../../contexts/gameContext';
 
 const moveVertically = keyframes`
   0% {
@@ -14,16 +12,14 @@ const moveVertically = keyframes`
   }
 `;
 
+const cssAnimation = (props) => {
+  return css`animation: ${moveVertically} 4s linear`;
+}
 
 const MoveElipse = styled.ellipse`
-${props => props.activeAnimation && css`
-  animation: ${props.moveVertically} 4s linear;
-`}
-`;
+${props => props.activeAnimation && cssAnimation()}`;
 
 const CannonBall = (props) => {
-
-  const { shootStatus } = useContext(StartPositionBallContext);
 
   const ballStyle = {
     fill: '#777',
@@ -33,11 +29,10 @@ const CannonBall = (props) => {
 
   return (
     <MoveElipse
-      activeAnimation={shootStatus}
-      moveVertically={moveVertically}
+      activeAnimation={props.shootStatus}
       style={ballStyle}
-      cx={props.position.x}
-      cy={props.position.y}
+      cx={props.startPosition.x}
+      cy={props.startPosition.y}
       rx="16"
       ry="16"
     />
@@ -45,10 +40,11 @@ const CannonBall = (props) => {
 };
 
 CannonBall.propTypes = {
-  position: PropTypes.shape({
+  startPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,
+  shootStatus: PropTypes.bool.isRequired,
 };
 
 export default CannonBall;
