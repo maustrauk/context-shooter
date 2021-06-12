@@ -8,10 +8,10 @@ import CannonBall from './CannonBall';
 
 const Cannon = (props) => {
 
-    const { balls } = useContext(StartPositionBallContext);
+    const { ball } = useContext(StartPositionBallContext);
 
     return <g>
-        {balls.map((ball, id) => (<CannonBall key={`StartBallId${id}`} startPosition={ball.position} shootStatus={false}/>))}
+        {!ball.shootStatus ? <CannonBall startPosition={ball.position} shootStatus={false}/> : null}
         <CannonPipe/>
         <CannonBase/>
     </g>
