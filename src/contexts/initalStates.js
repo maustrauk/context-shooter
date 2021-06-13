@@ -24,6 +24,8 @@ export const MovingBallsInitState = {
         x: 0,
         y: 0,
       },
+      createdAt: (new Date()).getTime(),
+      liveTime: 0,
       renderStatus: false,
     }
   ],

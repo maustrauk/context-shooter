@@ -8,6 +8,8 @@ const moveBalls = (movingBallsContext, staticBallContext, angleContext) => {
   const newBall = {
     startPosition: staticBall.position,
     endPosition: calculateStartPosition(angleContext.angle, gameHeight),
+    createdAt: (new Date()).getTime(),
+    liveTime: 3000,
     renderStatus: true,
   }
   const movingBalls = [...movingBallsContext.movingBalls, newBall];
