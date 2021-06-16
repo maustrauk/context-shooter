@@ -20,6 +20,7 @@ import { leaderboard } from '../utils/mockData';
 import staticBall from '../gameLogic/staticBall';
 import moveBalls from '../gameLogic/moveBalls';
 import FlyingBalls from './FlyingBalls';
+import checkForCollisions from '../gameLogic/checkForCollision';
 
 const Canvas = (props) => {
     const angleContext = useContext(AngleContext);
@@ -50,6 +51,7 @@ const Canvas = (props) => {
     const onClickCanvas = (e) => {
       e.preventDefault();
       moveBalls(movingBallsContext,startPositionBallContext, angleContext);
+      checkForCollisions(movingBallsContext, flyingObjectContext);
     }
 
     const startButtonHandler = (e) => {
