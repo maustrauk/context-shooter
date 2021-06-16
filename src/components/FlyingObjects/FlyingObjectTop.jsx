@@ -14,8 +14,8 @@ const FlyingObjectTop = (props) => {
 
   const cubicBezierCurve = {
     initialAxis: {
-      x: props.position.x - halfBase,
-      y: props.position.y,
+      x: props.startPosition.x - halfBase,
+      y: props.startPosition.y,
     },
     initialControlPoint: {
       x: 10,
@@ -40,7 +40,7 @@ const FlyingObjectTop = (props) => {
 };
 
 FlyingObjectTop.propTypes = {
-  position: PropTypes.shape({
+  startPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,

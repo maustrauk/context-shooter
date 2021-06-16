@@ -12,7 +12,7 @@ const FlyingObjects = (props) => {
     return (
         <g>
             {startGame ? 
-            flyingObjects.map((flyingObject, id) => (<FlyingObject key={`FlyingObjectId${id}`} position={flyingObject.position}/>)) :
+            flyingObjects.map((flyingObject, id) => (<FlyingObject key={`FlyingObjectId${id}`} startPosition={flyingObject.startPosition} endPosition={flyingObject.endPosition}/>)) :
             null}
         </g>
     );

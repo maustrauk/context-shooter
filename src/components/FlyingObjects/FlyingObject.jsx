@@ -8,18 +8,22 @@ import { flyingObjectsAnimation } from '../../utils/animations';
 
 
 const Move = styled.g`
-  ${flyingObjectsAnimation()}
+  ${props => flyingObjectsAnimation(props.endPosition)}
 `;
 
 const FlyingObject = props => (
-  <Move>
-    <FlyingObjectBase position={props.position} />
-    <FlyingObjectTop position={props.position} />
+  <Move endPosition={props.endPosition}>
+    <FlyingObjectBase startPosition={props.startPosition} />
+    <FlyingObjectTop startPosition={props.startPosition} />
   </Move>
 );
 
 FlyingObject.propTypes = {
-  position: PropTypes.shape({
+  startPosition: PropTypes.shape({
+    x: PropTypes.number.isRequired,
+    y: PropTypes.number.isRequired
+  }).isRequired,
+  endPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,

@@ -9,8 +9,8 @@ const FlyingObjectBase = (props) => {
 
   return (
     <ellipse
-      cx={props.position.x}
-      cy={props.position.y}
+      cx={props.startPosition.x}
+      cy={props.startPosition.y}
       rx="40"
       ry="10"
       style={style}
@@ -19,7 +19,7 @@ const FlyingObjectBase = (props) => {
 };
 
 FlyingObjectBase.propTypes = {
-  position: PropTypes.shape({
+  startPosition: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
   }).isRequired,
