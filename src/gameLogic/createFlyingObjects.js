@@ -1,4 +1,4 @@
-import { createInterval, flyingObjectsStarterYAxis, maxFlyingObjects, flyingObjectsStarterPositions } from '../utils/constants';
+import { createInterval, flyingObjectsStarterYAxis, maxFlyingObjects, flyingObjectsStarterPositions, gameHeight } from '../utils/constants';
 import deleteFlyingObject from './deleteFlyingObject';
 
 const createFlyingObjects = (flyingObjectsContext) => {
@@ -15,9 +15,13 @@ const createFlyingObjects = (flyingObjectsContext) => {
     const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
 
     const newFlyingObject = {
-        position: {
+      startPosition: {
           x: flyingObjectPosition,
           y: flyingObjectsStarterYAxis,
+        },
+        endPosition: {
+          x: 0,
+          y: gameHeight,
         },
         createdAt: now
     };

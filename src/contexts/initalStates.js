@@ -1,3 +1,5 @@
+import { gameHeight } from '../utils/constants';
+
 export const AngleInitState = {
     angle: 0,
   };
@@ -40,16 +42,24 @@ export const GameplayInitState = {
 export  const FlyingObjectInitState = {
     flyingObjects: [
         {
-            position: {
+          startPosition: {
                 x: -150,
                 y: -600
+            },
+            endPosition: {
+              x: 0,
+              y: gameHeight,
             },
             createdAt:  (new Date()).getTime()
         },
         {
-            position: {
+          startPosition: {
                 x: 150,
                 y: -600
+            },
+            endPosition: {
+              x: 0,
+              y: gameHeight,
             },
             createdAt:  (new Date()).getTime()
         }
