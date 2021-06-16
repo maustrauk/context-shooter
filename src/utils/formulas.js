@@ -38,13 +38,6 @@ export const calculateStartPosition = (angle, hight) => {
     }
   };
 
-export const vectorCross = (xA, yA, xB, yB) => {
-  const angle = Math.acos(xA * xB + yA * yB);
-  const moduleA = Math.sqrt(xA * xA + yA * yA);
-  const moduleB = Math.sqrt(xB * xB + yB * yB);
-
-  return moduleA * moduleB * Math.sin(angle);
-}
 
 export const traceCross = (targetStartPos, targetEndPos, ballStartPos, ballEndPos) => {
   const A = targetStartPos;
@@ -82,24 +75,21 @@ export const traceCross = (targetStartPos, targetEndPos, ballStartPos, ballEndPo
     y: A.y - C.y,
   }
 
-  const Z1 = vectorCross(AB.x, AB.y, AC.x, AC.y);
-  const Z2 = vectorCross(AB.x, AB.y, AD.x, AD.y);
+  const z1 = AB.x * AC.y - AB.y * AC.x;
+  const z2 = AB.x * AD.y - AB.y * AD.x;
+  const z3 = CD.x * CB.y - CD.y * CB.x;
+  const z4 = CD.x * CA.y - CD.y * CA.x;
   
-  if (Math.sign(Z1) === Math.sign(Z2)) {
+  if (Math.sign(z1) === Math.sign(z2)) {
     return {};
   }
 
-  const Z3 = vectorCross(CD.x, CD.y, CB.x, CB.y);
-  const Z4 = vectorCross(CD.x, CD.y, CA.x, CA.y);
-
-  if (Math.sign(Z3) === Math.sign(Z4)) {
+  if (Math.sign(z3) === Math.sign(z4)) {
     return {};
   }
 
   return {
-    x: C.x + (D.x - C.x) * Math.abs(Z1) / Math.abs(Z2 - Z1),
-    y: C.y + (D.y - C.y) * Math.abs(Z1) / Math.abs(Z2 - Z1),
+    x: C.x + (D.x - C.x) * Math.abs(z1) / Math.abs(z2 - z1),
+    y: C.y + (D.y - C.y) * Math.abs(z1) / Math.abs(z2 - z1),
   }
-
-
 }
