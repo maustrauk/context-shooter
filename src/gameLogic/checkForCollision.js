@@ -1,4 +1,4 @@
-import { traceCross } from '../utils/formulas';
+import { traceCross, timeCross } from '../utils/formulas';
 
 const traceChecker = (initialValues) => {
     const delta = 10;
@@ -51,9 +51,11 @@ const traceChecker = (initialValues) => {
     let crossingObject = {};
 
     traceArray.forEach((arr) => {
-        const tracesObject = traceCross(arr[0].targetStartPos, arr[0].targetEndPos, arr[1].ballStartPos, arr[1].ballEndPos);
+        const targetPos = arr[0];
+        const ballPos = arr[1];
+        const tracesObject = traceCross(targetPos.targetStartPos, targetPos.targetEndPos, ballPos.ballStartPos, ballPos.ballEndPos);
         if (Object.keys(tracesObject).length !== 0) {
-            crossingObject = {...tracesObject};
+            crossingObject = {crossPoint: tracesObject, targetPos: targetPos, ballPos: ballPos};
             return crossingObject;
         }
     });
@@ -74,9 +76,12 @@ const checkForCollision = (movingBallsContext, flyingObjectContext) => {
                 ballEndPos: movingBall.endPosition,
             };
 
-            const crossPoint = traceChecker(initialValues);
-            if (Object.keys(crossPoint).length !== 0) {
-                console.log("Hit");
+            const crossObject = traceChecker(initialValues);
+            if (Object.keys(crossObject).length !== 0) {
+                const lifeTime = timeCross(crossObject, 4000, 4000);
+                if (lifeTime > 0) {
+                    console.log(lifeTime);
+                }
             }
         });
     });

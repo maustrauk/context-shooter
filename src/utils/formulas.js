@@ -38,42 +38,38 @@ export const calculateStartPosition = (angle, hight) => {
     }
   };
 
+export const ABCDVector = (A, B, C, D) => {
+  return { A: A, B: B, C: C, D: D,
+    AB: {
+      x: B.x - A.x,
+      y: B.y - A.y,
+    },
+    AC: {
+      x: C.x - A.x,
+      y: C.y - A.y,
+    },
+    AD: {
+      x: D.x - A.x,
+      y: D.y - A.y,
+    },
+    CD: {
+      x: D.x - C.x,
+      y: D.y - C.y,
+    },
+    CB: {
+      x: B.x - C.x,
+      y: B.y - C.y,
+    },
+    CA: {
+      x: A.x - C.x,
+      y: A.y - C.y,
+    },
+  }
+}
+
 
 export const traceCross = (targetStartPos, targetEndPos, ballStartPos, ballEndPos) => {
-  const A = targetStartPos;
-  const B = targetEndPos;
-  const C = ballStartPos;
-  const D = ballEndPos;
-
-  const AB = {
-    x: B.x - A.x,
-    y: B.y - A.y,
-  }
-
-  const AC = {
-    x: C.x - A.x,
-    y: C.y - A.y,
-  }
-
-  const AD = {
-    x: D.x - A.x,
-    y: D.y - A.y,
-  }
-
-  const CD = {
-    x: D.x - C.x,
-    y: D.y - C.y,
-  }
-
-  const CB = {
-    x: B.x - C.x,
-    y: B.y - C.y,
-  }
-
-  const CA = {
-    x: A.x - C.x,
-    y: A.y - C.y,
-  }
+  const { C, D, AB, AC, AD, CD, CB, CA } =ABCDVector(targetStartPos, targetEndPos, ballStartPos, ballEndPos);
 
   const z1 = AB.x * AC.y - AB.y * AC.x;
   const z2 = AB.x * AD.y - AB.y * AD.x;
@@ -92,4 +88,32 @@ export const traceCross = (targetStartPos, targetEndPos, ballStartPos, ballEndPo
     x: C.x + (D.x - C.x) * Math.abs(z1) / Math.abs(z2 - z1),
     y: C.y + (D.y - C.y) * Math.abs(z1) / Math.abs(z2 - z1),
   }
-}
+};
+
+export const timeCross = (crossObject, targetTime, ballTime) => {
+  const crossPoint = crossObject.crossPoint;
+  const targetStartPos = crossObject.targetPos.targetStartPos;
+  const ballStartPos = crossObject.ballPos.ballStartPos;
+  const targetEndPos = crossObject.targetPos.targetEndPos;
+  const ballEndPos = crossObject.ballPos.ballEndPos;
+
+  const collisionVector = ABCDVector(targetStartPos, crossPoint, ballStartPos, crossPoint);
+  const speedVector = ABCDVector(targetStartPos, targetEndPos, ballStartPos, ballEndPos);
+
+  const targetTrack = Math.sqrt(collisionVector.AB.x * collisionVector.AB.x + collisionVector.AB.y * collisionVector.AB.y);
+  const ballTrack = Math.sqrt(collisionVector.CB.x * collisionVector.CB.x + collisionVector.CB.y * collisionVector.CB.y);
+
+  const targetSpeed = Math.sqrt(speedVector.AB.x * speedVector.AB.x + speedVector.AB.y * speedVector.AB.y) / targetTime;
+  const ballSpeed = Math.sqrt(speedVector.CD.x * collisionVector.CD.x + collisionVector.CD.y * collisionVector.CD.y) / ballTime;
+
+  const targetCollision = targetTrack / targetSpeed;
+  const ballCollision = ballTrack / ballSpeed;
+
+  const err = 500;
+
+  if (ballCollision >= (targetCollision - err) && ballCollision <= (targetCollision + err)) {
+    return ballCollision;
+  } else {
+    return -1;
+  }
+};
